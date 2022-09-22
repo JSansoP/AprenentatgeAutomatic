@@ -17,5 +17,5 @@ y_prediction = perceptron.predict(X)
 
 #  Mostram els resultats
 plt.figure(1)
-plt.scatter(X[:, 0], X[:, 1], c=y)
+plt.scatter(X[:, 0], X[:, 1], c=y_prediction)
 plt.show()

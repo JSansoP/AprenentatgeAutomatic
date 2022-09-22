@@ -42,13 +42,13 @@ class Perceptron:
         self.w_ = np.zeros(1 + X.shape[1])
         for iter in range(self.n_iter):
             for i, x in enumerate(X):
-                prediction = self.predict(x)
-                self.update_weights(x, prediction[0], y[i])
+                prediction = self.result(x)
+                self.update_weights(x, prediction, y[i])
 
         return self
 
     def update_weights(self, x, prediction, target):
-        for w in range(x.shape[1]):
+        for w in range(x.shape[0]):
             deltaw = self.eta*(target - prediction)*x[w]
             self.w_[w+1] += deltaw
         self.w_[0] += self.eta*(target - prediction)
@@ -59,7 +59,11 @@ class Perceptron:
             Second apply the step function
             Return a list with classes
         """
-        z = np.sum(np.multiply(X, self.w_[1:]))+self.w_[0]
-        outputs = np.ones(z.shape[1])
-        outputs[z < 0] = -1
-        return outputs
+        out = []
+        for x in X:
+            out.append(self.result(x))
+        return out
+
+    def result(self, x):
+        z = np.dot(x, self.w_[1:])+self.w_[0]
+        return 1 if z >=0 else -1
