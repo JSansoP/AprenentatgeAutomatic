@@ -21,6 +21,7 @@ class Perceptron:
     def __init__(self, eta=0.01, n_iter=10):
         self.eta = eta
         self.n_iter = n_iter
+        self.errors_ = np.zeros(self.n_iter)
 
     def fit(self, X, y):
 
@@ -43,8 +44,9 @@ class Perceptron:
         for iter in range(self.n_iter):
             for i, x in enumerate(X):
                 prediction = self.result(x)
+                if prediction != y[i]:
+                    self.errors_[iter] += 1
                 self.update_weights(x, prediction, y[i])
-
         return self
 
     def update_weights(self, x, prediction, target):
