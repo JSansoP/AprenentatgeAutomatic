@@ -1,8 +1,8 @@
-import sys
+# Joan Sansó Pericàs
 
+import sys
 import matplotlib.pyplot as plt
 from sklearn import datasets
-from sklearn.preprocessing import StandardScaler
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.mixture import GaussianMixture
